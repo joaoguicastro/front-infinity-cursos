@@ -1,0 +1,45 @@
+.page-container-relatorio {
+    display: flex;
+    height: 100vh; /* Garante que a sidebar e o conteúdo preencham a tela */
+  }
+  
+  .relatorio-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #f0f2f5; /* Fundo claro para o conteúdo */
+  }
+  
+  .curso-box {
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .curso-box h2 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .curso-box h3 {
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .curso-box ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .curso-box li {
+    background-color: #e9ecef;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .curso-box p {
+    color: #777;
+  }
+  

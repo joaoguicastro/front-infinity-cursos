@@ -1,0 +1,25 @@
+.page-container-devedores {
+    display: flex;
+    height: 100vh;
+}
+
+.content-container {
+    flex: 1;
+    padding: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.devedores-list {
+    margin-top: 20px;
+}
+
+.devedor-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}

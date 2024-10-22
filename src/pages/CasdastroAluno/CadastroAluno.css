@@ -1,0 +1,115 @@
+/* Estilo geral para a página */
+.page-container-aluno {
+    display: flex;
+    height: 100vh; /* Garante que a sidebar e o conteúdo preencham a tela */
+}
+
+/* Estilos da sidebar */
+.sidebar-aluno {
+    width: 250px;
+    background-color: #003b73; /* Cor verde da empresa */
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.sidebar-aluno h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.sidebar-aluno ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-aluno ul li {
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+.sidebar-aluno ul li:hover {
+    background-color: #005bb5;
+}
+
+/* Container do conteúdo principal */
+.form-container-custom {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Container para o formulário de cadastro */
+.cadastro-aluno-box {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cadastro-aluno-box h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.cadastro-aluno-box .form-group-custom {
+    margin-bottom: 15px;
+}
+
+.cadastro-aluno-box .form-group-custom label {
+    display: block;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.cadastro-aluno-box .form-group-custom input,
+.cadastro-aluno-box .form-group-custom select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.cadastro-aluno-box button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cadastro-aluno-box button:hover {
+    background-color: #0056b3;
+}
+
+/* Para garantir responsividade */
+@media (max-width: 768px) {
+    .cadastro-aluno-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .cadastro-aluno-box button {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,113 @@
+.page-container-curso {
+    display: flex;
+    height: 100vh; /* Garante que a sidebar e o conteúdo preencham a tela */
+}
+
+/* Estilos da sidebar */
+.sidebar-curso {
+    width: 250px;
+    background-color: #003b73; /* Cor verde da empresa */
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.sidebar-curso h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.sidebar-curso ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-curso ul li {
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+.sidebar-curso ul li:hover {
+    background-color: #005bb5;
+}
+
+/* Container do conteúdo principal */
+.form-container-curso {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Container para o formulário de criação de curso */
+.criacao-curso-box {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.criacao-curso-box h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.criacao-curso-box .form-group-curso {
+    margin-bottom: 15px;
+}
+
+.criacao-curso-box .form-group-curso label {
+    display: block;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.criacao-curso-box .form-group-curso input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.criacao-curso-box button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.criacao-curso-box button:hover {
+    background-color: #0056b3;
+}
+
+/* Para garantir responsividade */
+@media (max-width: 768px) {
+    .criacao-curso-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .criacao-curso-box button {
+        padding: 10px;
+    }
+}

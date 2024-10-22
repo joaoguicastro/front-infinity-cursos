@@ -1,0 +1,77 @@
+.page-container-financeiro {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar-financeiro {
+    width: 250px;
+    background-color: #003b73; /* Cor da empresa */
+    color: white;
+    padding: 20px;
+}
+
+.form-container-financeiro {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.criacao-financeiro-box {
+    width: 80%;
+    max-width: 600px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.criacao-financeiro-box h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group-financeiro {
+    margin-bottom: 15px;
+}
+
+.form-group-financeiro label {
+    display: block;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.form-group-financeiro input,
+.form-group-financeiro select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .criacao-financeiro-box {
+        width: 90%;
+        padding: 20px;
+    }
+}
