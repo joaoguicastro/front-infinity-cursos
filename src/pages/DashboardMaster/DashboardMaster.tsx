@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import SidebarMenu from '../../components/Sidebarmenu'; // Importar o componente de menu
+import SidebarMenu from '../../components/Sidebarmenu';
 import './DashboardMaster.css';
 
 interface Aluno {
@@ -13,6 +13,12 @@ interface Aluno {
 interface Devedor {
   id: number;
   alunoId: number;
+  status: string;
+}
+
+interface Recebimento {
+  id: number;
+  valorPago: number;
   status: string;
 }
 
@@ -29,7 +35,7 @@ const DashboardMaster: React.FC = () => {
     const fetchData = async () => {
       setIsLoading(true);
       setError('');
-
+    
       try {
         const [devedoresResponse, alunosResponse, recebimentosResponse] = await Promise.all([
           axios.get<Devedor[]>('http://localhost:3333/relatorios/devedores', {
@@ -42,10 +48,10 @@ const DashboardMaster: React.FC = () => {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
-
+    
         setTotalDevedores(devedoresResponse.data.length);
         setTotalAlunos(alunosResponse.data.length);
-        setRecebimentoMensal(recebimentosResponse.data.totalRecebido);
+        setRecebimentoMensal(recebimentosResponse.data.totalRecebido); // Acessa o total direto
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
         setError('Erro ao buscar dados do dashboard. Tente novamente mais tarde.');
@@ -53,6 +59,8 @@ const DashboardMaster: React.FC = () => {
         setIsLoading(false);
       }
     };
+    
+    
 
     fetchData();
   }, []);

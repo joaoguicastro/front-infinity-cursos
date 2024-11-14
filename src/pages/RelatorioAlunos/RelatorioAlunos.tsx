@@ -11,6 +11,7 @@ const RelatorioAlunos: React.FC = () => {
   const [showAlunos, setShowAlunos] = useState(false);
   const navigate = useNavigate(); // Utilizar o hook de navegação do react-router-dom
 
+  // Função para buscar alunos com o curso associado
   const fetchAlunos = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -27,6 +28,7 @@ const RelatorioAlunos: React.FC = () => {
     }
   };
 
+  // Função para filtrar alunos pelo nome
   const filtrarPorNome = () => {
     const alunosFiltrados = alunos.filter(aluno =>
       aluno.nome.toLowerCase().includes(filtroNome.toLowerCase())
@@ -61,7 +63,7 @@ const RelatorioAlunos: React.FC = () => {
               <div key={aluno.id} className="aluno-item">
                 <p><strong>Nome:</strong> {aluno.nome}</p>
                 <p><strong>CPF:</strong> {aluno.cpf}</p>
-                <p><strong>Curso:</strong> {aluno.curso ? aluno.curso.nome : 'Nenhum curso'}</p>
+                <p><strong>Curso:</strong> {aluno.cursoMatriculado ? aluno.cursoMatriculado.nome : 'Nenhum curso'}</p>
                 <button onClick={() => handleVerDetalhes(aluno.id)}>Ver Detalhes</button>
               </div>
             ))}

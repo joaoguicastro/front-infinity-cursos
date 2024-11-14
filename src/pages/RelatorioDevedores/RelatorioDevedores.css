@@ -1,25 +1,36 @@
-.page-container-devedores {
+.page-container {
     display: flex;
-    height: 100vh;
-}
-
-.content-container {
+  }
+  
+  .content-container {
     flex: 1;
     padding: 20px;
-}
-
-.input-group {
-    margin-bottom: 20px;
-}
-
-.devedores-list {
-    margin-top: 20px;
-}
-
-.devedor-item {
+  }
+  
+  .relatorio-lista {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+    gap: 16px;
+    padding: 10px;
+    justify-content: center; /* Centraliza os itens horizontalmente */
+  }
+  
+  .devedor-item {
+    width: 250px; /* Define uma largura fixa para cada item */
     background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    text-align: left;
+    transition: transform 0.2s;
+  }
+  
+  .devedor-item:hover {
+    transform: translateY(-4px);
+  }
+  
+  .devedor-item p {
+    margin: 8px 0;
+    font-weight: bold;
+  }
+  

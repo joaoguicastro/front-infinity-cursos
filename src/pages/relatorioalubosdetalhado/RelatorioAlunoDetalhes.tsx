@@ -56,6 +56,7 @@ const RelatorioAlunoDetalhes: React.FC = () => {
     return parcelaSelecionada.valor - desconto;
   };
 
+  // Função para dar baixa no pagamento
   const darBaixaPagamento = async () => {
     try {
       const token = localStorage.getItem('token'); // Obtém o token do LocalStorage
@@ -67,7 +68,7 @@ const RelatorioAlunoDetalhes: React.FC = () => {
   
       const valorFinal = calcularValorComDesconto(); // Calcula o valor final com desconto
   
-      const response = await axios.put(`http://localhost:3333/financeiro/baixa/${parcelaSelecionada.id}`, {
+      await axios.put(`http://localhost:3333/financeiro/baixa/${parcelaSelecionada.id}`, {
         metodoPagamento,
         desconto: descontoPercentual,
         valorPago: valorFinal,
@@ -78,24 +79,7 @@ const RelatorioAlunoDetalhes: React.FC = () => {
       });
   
       setShowModal(false); // Fecha o modal
-      // Atualiza os dados no estado do aluno
-      setAluno((prevAluno: any) => ({
-        ...prevAluno,
-        financeiro: prevAluno.financeiro.map((parcela: any) => {
-          if (parcela.id === parcelaSelecionada.id) {
-            return {
-              ...parcela,
-              valorPago: response.data.valorPago, // Atualiza o valor pago
-              dataPagamento: response.data.dataPagamento, // Atualiza a data de pagamento
-              status: 'pago', // Atualiza o status
-              desconto: descontoPercentual, // Atualiza o desconto
-              multa, // Atualiza a multa se aplicável
-              formaPagamento: metodoPagamento, // Atualiza a forma de pagamento
-            };
-          }
-          return parcela;
-        }),
-      }));
+      fetchAluno(); // Recarrega os dados do aluno após dar baixa
   
       alert('Pagamento dado baixa com sucesso!');
     } catch (error) {
@@ -114,29 +98,13 @@ const RelatorioAlunoDetalhes: React.FC = () => {
       }
   
       // Faz o estorno do pagamento e obtém o valor restaurado
-      const response = await axios.put(`http://localhost:3333/financeiro/estorno/${parcelaId}`, {}, {
+      await axios.put(`http://localhost:3333/financeiro/estorno/${parcelaId}`, {}, {
         headers: {
           Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho da requisição
         },
       });
   
-      // Atualiza os dados do aluno no estado após o estorno
-      setAluno((prevAluno: any) => ({
-        ...prevAluno,
-        financeiro: prevAluno.financeiro.map((parcela: any) => {
-          if (parcela.id === parcelaId) {
-            return {
-              ...parcela,
-              valor: response.data.valor, // Restaura o valor original da parcela
-              valorPago: 0, // Zera o valor pago
-              desconto: 0, // Zera o desconto
-              status: 'pendente', // Atualiza o status para pendente
-              dataPagamento: null, // Remove a data de pagamento
-            };
-          }
-          return parcela;
-        }),
-      }));
+      fetchAluno(); // Recarrega os dados do aluno após o estorno
   
       alert('Pagamento estornado com sucesso!');
     } catch (error) {
@@ -144,7 +112,6 @@ const RelatorioAlunoDetalhes: React.FC = () => {
       alert('Erro ao estornar pagamento');
     }
   };
-  
 
   if (loading) {
     return <p>Carregando dados do aluno...</p>;
@@ -199,7 +166,7 @@ const RelatorioAlunoDetalhes: React.FC = () => {
         {activeTab === 'financeiro' && (
           <div>
             <h2>Financeiro</h2>
-            {aluno.financeiro && aluno.financeiro.length > 0 ? (
+            {aluno.cursoMatriculado?.financeiro && aluno.cursoMatriculado.financeiro.length > 0 ? (
               <table className="financeiro-table">
                 <thead>
                   <tr>
@@ -215,9 +182,7 @@ const RelatorioAlunoDetalhes: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {aluno.financeiro
-                    .sort((a: any, b: any) => new Date(a.dataVencimento).getTime() - new Date(b.dataVencimento).getTime())
-                    .map((parcela: any, index: number) => (
+                  {aluno.cursoMatriculado.financeiro.map((parcela: any, index: number) => (
                     <tr key={index}>
                       <td>{new Date(parcela.dataVencimento).toLocaleDateString('pt-BR')}</td>
                       <td>R$ {parcela.valor.toFixed(2)}</td>

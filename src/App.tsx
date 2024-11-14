@@ -10,6 +10,7 @@ import RelatorioCursos from './pages/RelatorioCursos/RelatorioCursos';
 import RelatorioAlunos from './pages/RelatorioAlunos/RelatorioAlunos';
 import RelatorioDevedores from './pages/RelatorioDevedores/RelatorioDevedores';
 import RelatorioAlunoDetalhes from './pages/relatorioalubosdetalhado/RelatorioAlunoDetalhes';
+import AdminDashboard from './pages/DashboardAdmin/AdminDashboard';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard-master" element={<DashboardMaster />} />
+        <Route path="/dashboard-admin" element={<AdminDashboard />} />
         <Route path="/cadastro-aluno" element={<CadastroAluno />} />
         <Route path="/cadastro-curso" element={<CriacaoCurso />} />
         <Route path="/cadastro-financeiro" element={<CriacaoFinanceiro />} />
@@ -25,6 +27,13 @@ const App: React.FC = () => {
         <Route path="/relatorio-alunos" element={<RelatorioAlunos />} />
         <Route path="/alunos/:id" element={<RelatorioAlunoDetalhes />} />
         <Route path="/relatorio-devedores" element={<RelatorioDevedores />} />
+        <Route path="/admin/home" element={<AdminDashboard />} />
+        <Route path="/admin/cadastro-aluno" element={<CadastroAluno />} />
+        <Route path="/admin/cadastro-curso" element={<CriacaoCurso />} />
+        <Route path="/admin/cadastro-financeiro" element={<CriacaoFinanceiro />} />
+        <Route path="/admin/relatorio-cursos" element={<RelatorioCursos />} />
+        <Route path="/admin/relatorio-alunos" element={<RelatorioAlunos />} />
+        <Route path="/admin/relatorio-devedores" element={<RelatorioDevedores />} />
       </Routes>
     </Router>
   );

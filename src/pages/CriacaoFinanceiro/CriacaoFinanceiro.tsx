@@ -95,21 +95,6 @@ const CriacaoFinanceiro: React.FC = () => {
           <h1>Criação de Financeiro</h1>
           <form onSubmit={handleCriacaoFinanceiro}>
             <div className="form-group-financeiro">
-              <label>Aluno:</label>
-              <select
-                value={alunoId}
-                onChange={(e) => setAlunoId(e.target.value)}
-                required
-              >
-                <option value="">Selecione um aluno</option>
-                {alunos.map((aluno: any) => (
-                  <option key={aluno.id} value={aluno.id}>
-                    {aluno.nome}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group-financeiro">
               <label>Curso:</label>
               <select
                 value={cursoSelecionado || ''}

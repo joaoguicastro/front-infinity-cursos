@@ -1,0 +1,77 @@
+#adminDashboard-container {
+    display: flex;
+  }
+  
+  #adminDashboard-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f4f6f8;
+  }
+  
+  .adminDashboard-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #444;
+  }
+  
+  .adminDashboard-taskInput {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  
+  .adminDashboard-addTaskButton {
+    padding: 10px 16px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .adminDashboard-addTaskButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .adminDashboard-taskList {
+    list-style: none;
+    margin-top: 20px;
+    padding: 0;
+  }
+  
+  .adminDashboard-taskItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+    transition: transform 0.2s;
+  }
+  
+  .adminDashboard-taskItem:hover {
+    transform: scale(1.02);
+  }
+  
+  .adminDashboard-removeTaskButton {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .adminDashboard-removeTaskButton:hover {
+    background-color: #c0392b;
+  }
+  
