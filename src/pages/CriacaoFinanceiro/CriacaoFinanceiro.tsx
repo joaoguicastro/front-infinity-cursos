@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SidebarMenu from '../../components/Sidebarmenu'; // Importar o componente de menu
+import SidebarMenu from '../../components/Sidebarmenu';
 import './CriacaoFinanceiro.css';
 
 const CriacaoFinanceiro: React.FC = () => {
   const [alunoId, setAlunoId] = useState('');
   const [cursoSelecionado, setCursoSelecionado] = useState<number | null>(null);
   const [valor, setValor] = useState('');
-  const [quantidadeParcelas, setQuantidadeParcelas] = useState<number>(1); // Novo campo para quantidade de parcelas
+  const [quantidadeParcelas, setQuantidadeParcelas] = useState<number>(1);
   const [status, setStatus] = useState('');
   const [dataPagamento, setDataPagamento] = useState('');
-  const [cursos, setCursos] = useState([]); // Para armazenar os cursos vindos do back-end
-  const [alunos, setAlunos] = useState([]); // Para armazenar os alunos vindos do back-end
+  const [cursos, setCursos] = useState([]);
+  const [alunos, setAlunos] = useState([]);
 
-  // Função para buscar cursos no back-end
   useEffect(() => {
     const fetchCursos = async () => {
       try {
@@ -23,7 +22,7 @@ const CriacaoFinanceiro: React.FC = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setCursos(response.data); // Armazena os cursos no estado
+        setCursos(response.data);
       } catch (error) {
         console.error('Erro ao buscar cursos:', error);
       }
@@ -37,7 +36,7 @@ const CriacaoFinanceiro: React.FC = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setAlunos(response.data); // Armazena os alunos no estado
+        setAlunos(response.data);
       } catch (error) {
         console.error('Erro ao buscar alunos:', error);
       }
@@ -47,19 +46,22 @@ const CriacaoFinanceiro: React.FC = () => {
     fetchAlunos();
   }, []);
 
-  // Função para lidar com o envio do formulário de criação de financeiro
+  const formatarData = (data: string) => {
+    const partes = data.split('-'); // Divide "aaaa-mm-dd"
+    return `${partes[2]}/${partes[1]}/${partes[0]}`; // Retorna "dd/mm/aaaa"
+  };
+
   const handleCriacaoFinanceiro = async (e: React.FormEvent) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
 
-    // Verificando os dados antes de enviar
     const financeiroData = {
       alunoId: parseInt(alunoId),
       cursoId: cursoSelecionado!,
-      valor: parseFloat(valor), // Certifica-se de que o valor seja um número
+      valor: parseFloat(valor),
       quantidadeParcelas,
       status,
-      dataPagamento: dataPagamento || null, // Envia null se a data de pagamento não estiver definida
+      dataVencimento: dataPagamento ? formatarData(dataPagamento) : undefined, // Converte para "dd/mm/aaaa"
     };
 
     console.log('Dados enviados ao servidor:', financeiroData);
@@ -79,7 +81,7 @@ const CriacaoFinanceiro: React.FC = () => {
       alert('Financeiro criado com sucesso!');
     } catch (error: any) {
       if (error.response) {
-        console.error('Erro resposta da API:', error.response.data); // Exibe os detalhes do erro da API
+        console.error('Erro resposta da API:', error.response.data);
       } else {
         console.error('Erro geral:', error.message);
       }
@@ -98,7 +100,7 @@ const CriacaoFinanceiro: React.FC = () => {
               <label>Curso:</label>
               <select
                 value={cursoSelecionado || ''}
-                onChange={(e) => setCursoSelecionado(parseInt(e.target.value))} // Converte o valor para número
+                onChange={(e) => setCursoSelecionado(parseInt(e.target.value))}
                 required
               >
                 <option value="">Selecione um curso</option>
@@ -139,14 +141,16 @@ const CriacaoFinanceiro: React.FC = () => {
                 <option value="">Selecione o status</option>
                 <option value="pendente">Pendente</option>
                 <option value="pago">Pago</option>
+                <option value="devendo">Devendo</option>
               </select>
             </div>
             <div className="form-group-financeiro">
-              <label>Data de Pagamento:</label>
+              <label>Data de Vencimento:</label>
               <input
                 type="date"
                 value={dataPagamento}
                 onChange={(e) => setDataPagamento(e.target.value)}
+                required
               />
             </div>
             <button type="submit">Criar Financeiro</button>

@@ -24,8 +24,7 @@ const AdminSidebar: React.FC = () => {
           {activeFolder === 'criar' && (
             <ul className="folder-content">
               <li onClick={() => navigate('/admin/cadastro-aluno')} className="admin-sidebar-subitem">Criar Aluno</li>
-              <li onClick={() => navigate('/admin/cadastro-curso')} className="admin-sidebar-subitem">Criar Curso</li>
-              <li onClick={() => navigate('/admin/cadastro-financeiro')} className="admin-sidebar-subitem">Criar Financeiro</li>
+              <li onClick={() => navigate('/presenca')}>Presença</li>
             </ul>
           )}
         </li>
@@ -37,9 +36,9 @@ const AdminSidebar: React.FC = () => {
           Relatórios
           {activeFolder === 'relatorios' && (
             <ul className="folder-content">
-              <li onClick={() => navigate('/admin/relatorio-cursos')} className="admin-sidebar-subitem">Relatório de Cursos</li>
               <li onClick={() => navigate('/admin/relatorio-alunos')} className="admin-sidebar-subitem">Relatório de Alunos</li>
               <li onClick={() => navigate('/admin/relatorio-devedores')} className="admin-sidebar-subitem">Relatório de Devedores</li>
+              <li onClick={() => navigate('/relatorio-presenca')}>Relatorios Presença</li>
             </ul>
           )}
         </li>

@@ -1,6 +1,9 @@
 .page-container-curso {
     display: flex;
     height: 100vh; /* Garante que a sidebar e o conteúdo preencham a tela */
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    overflow: hidden; /* Evita transbordamento horizontal */
 }
 
 /* Estilos da sidebar */
@@ -46,6 +49,7 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
+    overflow-y: auto; /* Permite rolagem vertical */
 }
 
 /* Container para o formulário de criação de curso */
@@ -56,6 +60,7 @@
     border-radius: 10px;
     padding: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px; /* Garante espaçamento em telas menores */
 }
 
 .criacao-curso-box h1 {
@@ -75,7 +80,8 @@
     margin-bottom: 5px;
 }
 
-.criacao-curso-box .form-group-curso input {
+.criacao-curso-box .form-group-curso input,
+.criacao-curso-box .form-group-curso textarea {
     width: 100%;
     padding: 10px;
     font-size: 14px;
@@ -87,7 +93,7 @@
 .criacao-curso-box button {
     width: 100%;
     padding: 12px;
-    background-color: #007bff;
+    background-color: #72b809; /* Cor verde da empresa */
     color: white;
     border: none;
     border-radius: 5px;
@@ -97,10 +103,10 @@
 }
 
 .criacao-curso-box button:hover {
-    background-color: #0056b3;
+    background-color: #5a9407; /* Verde mais escuro */
 }
 
-/* Para garantir responsividade */
+/* Responsividade */
 @media (max-width: 768px) {
     .criacao-curso-box {
         width: 90%;

@@ -1,0 +1,86 @@
+.page-container-usuarios {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.content-container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.usuarios-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 20px;
+}
+
+.usuario-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.usuario-item p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.senha-verificar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.senha-verificar input {
+    flex: 2; /* Faz com que o campo de entrada ocupe mais espaço */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px; /* Ajusta o tamanho da fonte para caber melhor */
+}
+
+.senha-verificar button {
+    flex: 1; /* Faz com que o botão seja proporcional ao campo */
+    padding: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* Impede que o texto quebre */
+}
+
+.senha-verificar button:hover {
+    background-color: #0056b3;
+}
+
+
+.delete-button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #d9363e;
+}

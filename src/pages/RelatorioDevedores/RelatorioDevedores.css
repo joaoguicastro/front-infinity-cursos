@@ -1,36 +1,79 @@
 .page-container {
-    display: flex;
-  }
-  
-  .content-container {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .relatorio-lista {
-    display: flex;
-    flex-wrap: wrap; /* Permite que os itens quebrem a linha */
-    gap: 16px;
-    padding: 10px;
-    justify-content: center; /* Centraliza os itens horizontalmente */
-  }
-  
+  display: flex;
+  height: 100vh; /* Garante que a página preencha toda a tela */
+  font-family: 'Arial', sans-serif; /* Estilo de fonte moderno */
+}
+
+.content-container {
+  flex: 1;
+  padding: 20px;
+  background-color: #f2f2f2; /* Fundo neutro para destaque */
+  overflow-y: auto; /* Permite rolagem vertical */
+}
+
+.relatorio-lista {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+  gap: 16px;
+  padding: 10px;
+  justify-content: center; /* Centraliza os itens horizontalmente */
+}
+
+.devedor-item {
+  width: 250px; /* Define uma largura fixa para cada item */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+  padding: 16px;
+  text-align: left;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.devedor-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Realce ao passar o mouse */
+}
+
+.devedor-item p {
+  margin: 8px 0;
+  font-weight: bold;
+  color: #333; /* Cor escura para destaque */
+}
+
+/* Adicionando responsividade */
+
+/* Para telas menores (mobile) */
+@media (max-width: 768px) {
   .devedor-item {
-    width: 250px; /* Define uma largura fixa para cada item */
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    text-align: left;
-    transition: transform 0.2s;
+      width: 90%; /* Ocupa quase toda a largura da tela */
   }
-  
-  .devedor-item:hover {
-    transform: translateY(-4px);
+
+  .relatorio-lista {
+      gap: 10px; /* Reduz o espaçamento entre itens */
   }
-  
-  .devedor-item p {
-    margin: 8px 0;
-    font-weight: bold;
+}
+
+/* Para telas de 13 polegadas */
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .devedor-item {
+      width: 200px; /* Reduz a largura para mais itens visíveis */
   }
-  
+}
+
+/* Para telas de 21 polegadas */
+@media (min-width: 1281px) and (max-width: 1920px) {
+  .devedor-item {
+      width: 220px;
+  }
+}
+
+/* Para telas de 27 polegadas */
+@media (min-width: 1921px) {
+  .devedor-item {
+      width: 300px; /* Itens maiores para aproveitar o espaço */
+  }
+
+  .relatorio-lista {
+      gap: 20px; /* Aumenta o espaçamento entre itens */
+  }
+}

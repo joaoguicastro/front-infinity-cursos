@@ -1,0 +1,195 @@
+.page-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f2f2f2;
+    font-family: 'Arial', sans-serif;
+}
+
+.content-container {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.select-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.select-container label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.select-container select {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.alunos-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 20px;
+}
+
+.aluno-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.aluno-item:hover {
+    transform: translateY(-4px);
+    background-color: #e9f5e4;
+}
+
+.aluno-item.selected {
+    background-color: #72b809;
+    color: white;
+}
+
+.calendario-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendario-container input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.calendario-container button {
+    padding: 10px 20px;
+    background-color: #72b809;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.calendario-container button:hover {
+    background-color: #5a9407;
+}
+
+/* Responsividade para telas de diferentes tamanhos */
+
+/* Para telas de 13 polegadas */
+@media (max-width: 1280px) {
+    .content-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .select-container select {
+        max-width: 300px;
+    }
+
+    .alunos-list {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+/* Para telas de 21 polegadas */
+@media (min-width: 1366px) and (max-width: 1920px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .select-container select {
+        max-width: 350px;
+    }
+
+    .alunos-list {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+/* Para telas de 27 polegadas */
+@media (min-width: 1920px) {
+    .content-container {
+        padding: 40px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .select-container select {
+        max-width: 400px;
+    }
+
+    .alunos-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* Para dispositivos móveis */
+@media (max-width: 768px) {
+    .page-container {
+        flex-direction: column;
+    }
+
+    .content-container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    .select-container {
+        margin-bottom: 15px;
+    }
+
+    .select-container select {
+        width: 90%;
+    }
+
+    .alunos-list {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .aluno-item {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .calendario-container button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .calendario-container input {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

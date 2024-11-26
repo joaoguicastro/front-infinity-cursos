@@ -39,35 +39,37 @@ const RelatorioCursos: React.FC = () => {
       <SidebarMenu />
       <div className="relatorio-container">
         <h1>Relatório de Cursos</h1>
-        {cursos.length === 0 ? (
-          <p>Não há cursos cadastrados no momento.</p>
-        ) : (
-          cursos.map((curso) => (
-            <div key={curso.id} className="curso-box">
-              <h2>Curso: {curso.nome}</h2>
-              <h3>Disciplinas:</h3>
-              <ul>
-                {curso.disciplinas && curso.disciplinas.length > 0 ? (
-                  curso.disciplinas.map((disciplina, index) => (
-                    <li key={index}>{disciplina}</li>
-                  ))
-                ) : (
-                  <li>Nenhuma disciplina cadastrada.</li>
-                )}
-              </ul>
-              <h3>Alunos Cadastrados:</h3>
-              {curso.alunos && curso.alunos.length > 0 ? (
+        <div className="scrollable-content">
+          {cursos.length === 0 ? (
+            <p>Não há cursos cadastrados no momento.</p>
+          ) : (
+            cursos.map((curso) => (
+              <div key={curso.id} className="curso-box">
+                <h2>Curso: {curso.nome}</h2>
+                <h3>Disciplinas:</h3>
                 <ul>
-                  {curso.alunos.map((aluno) => (
-                    <li key={aluno.id}>{aluno.nome}</li>
-                  ))}
+                  {curso.disciplinas && curso.disciplinas.length > 0 ? (
+                    curso.disciplinas.map((disciplina, index) => (
+                      <li key={index}>{disciplina}</li>
+                    ))
+                  ) : (
+                    <li>Nenhuma disciplina cadastrada.</li>
+                  )}
                 </ul>
-              ) : (
-                <p>Não há alunos cadastrados neste curso.</p>
-              )}
-            </div>
-          ))
-        )}
+                <h3>Alunos Cadastrados:</h3>
+                {curso.alunos && curso.alunos.length > 0 ? (
+                  <ul>
+                    {curso.alunos.map((aluno) => (
+                      <li key={aluno.id}>{aluno.nome}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>Não há alunos cadastrados neste curso.</p>
+                )}
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

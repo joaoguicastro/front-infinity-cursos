@@ -1,35 +1,70 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './RelatorioAlunoDetalhes.css'; // CSS para estilização
+import './RelatorioAlunoDetalhes.css';
 
 const RelatorioAlunoDetalhes: React.FC = () => {
-  const { id } = useParams<{ id: string }>(); // Pega o ID da URL
-  const navigate = useNavigate(); // Hook para navegação
-  const [aluno, setAluno] = useState<any>(null); // Estado para armazenar os detalhes do aluno
-  const [activeTab, setActiveTab] = useState('curso'); // Estado para controlar a aba ativa
-  const [loading, setLoading] = useState(true); // Estado para controle de carregamento
-  const [showModal, setShowModal] = useState(false); // Controle para o modal
-  const [parcelaSelecionada, setParcelaSelecionada] = useState<any>(null); // Parcela a ser dada baixa
-  const [metodoPagamento, setMetodoPagamento] = useState('pix'); // Método de pagamento selecionado
-  const [descontoPercentual, setDescontoPercentual] = useState(0); // Desconto aplicado em %
-  const [valorPago, setValorPago] = useState(0); // Valor pago
-  const [multa, setMulta] = useState(0); // Multa caso exista
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const [aluno, setAluno] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState('curso');
+  const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
+  const [senhaUsuario, setSenhaUsuario] = useState('');
+  const [parcelaSelecionada, setParcelaSelecionada] = useState<any>(null);
+  const [metodoPagamento, setMetodoPagamento] = useState('pix');
+  const [descontoPercentual, setDescontoPercentual] = useState(0);
+  const [valorPago, setValorPago] = useState(0);
+  const [multa, setMulta] = useState(0);
 
-  // Função para buscar os dados do aluno
+  // Estados para edição do cadastro
+  const [nome, setNome] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [nomeResponsavel, setNomeResponsavel] = useState('');
+  const [dataNascimento, setDataNascimento] = useState('');
+  const [endereco, setEndereco] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [cursoId, setCursoId] = useState<number>(0); // Curso selecionado
+  const [cursos, setCursos] = useState<any[]>([]); // Lista de cursos disponíveis
+
   const fetchAluno = async () => {
     try {
-      const token = localStorage.getItem('token'); // Obtém o token de autenticação
+      const token = localStorage.getItem('token');
       const response = await axios.get(`http://localhost:3333/alunos/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Envia o token no cabeçalho
+          Authorization: `Bearer ${token}`,
         },
       });
-      setAluno(response.data); // Define os dados do aluno no estado
-      setLoading(false); // Remove o estado de carregamento
+      setAluno(response.data);
+      setLoading(false);
+
+      // Preencher os campos de edição com os dados atuais do aluno
+      setNome(response.data.nome);
+      setCpf(response.data.cpf);
+      setNomeResponsavel(response.data.nomeResponsavel);
+      setDataNascimento(new Date(response.data.dataNascimento).toLocaleDateString('pt-BR'));
+      setEndereco(response.data.endereco);
+      setTelefone(response.data.telefone);
+      setCursoId(response.data.cursoId); // Preencher com o curso do aluno
     } catch (error) {
       console.error('Erro ao buscar detalhes do aluno:', error);
       setLoading(false);
+    }
+  };
+
+  const fetchCursos = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:3333/relatorios/cursos', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCursos(response.data); // Atualiza a lista de cursos disponíveis
+    } catch (error) {
+      console.error('Erro ao buscar cursos:', error);
     }
   };
 
@@ -37,50 +72,48 @@ const RelatorioAlunoDetalhes: React.FC = () => {
     if (id) {
       fetchAluno();
     }
+    fetchCursos(); // Busca a lista de cursos quando o componente é montado
   }, [id]);
 
   const handleVoltar = () => {
-    navigate('/relatorio-alunos'); // Redireciona para a página de relatórios de alunos
+    navigate('/relatorio-alunos');
   };
 
   const abrirModalBaixa = (parcela: any) => {
     setParcelaSelecionada(parcela);
     setShowModal(true);
-    setValorPago(parcela.valor); // Valor inicial é o valor total da parcela
-    setMulta(0); // Pode ser calculado baseado no vencimento, ou definido pelo usuário
+    setValorPago(parcela.valor);
+    setMulta(0);
   };
 
-  // Função para calcular o valor com desconto
   const calcularValorComDesconto = () => {
     const desconto = (parcelaSelecionada.valor * descontoPercentual) / 100;
     return parcelaSelecionada.valor - desconto;
   };
 
-  // Função para dar baixa no pagamento
   const darBaixaPagamento = async () => {
     try {
-      const token = localStorage.getItem('token'); // Obtém o token do LocalStorage
-  
+      const token = localStorage.getItem('token');
       if (!token) {
         alert('Token de autenticação não encontrado!');
         return;
       }
-  
-      const valorFinal = calcularValorComDesconto(); // Calcula o valor final com desconto
-  
-      await axios.put(`http://localhost:3333/financeiro/baixa/${parcelaSelecionada.id}`, {
-        metodoPagamento,
-        desconto: descontoPercentual,
-        valorPago: valorFinal,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho da requisição
+      const valorFinal = calcularValorComDesconto();
+      await axios.put(
+        `http://localhost:3333/financeiro/baixa/${parcelaSelecionada.id}`,
+        {
+          metodoPagamento,
+          desconto: descontoPercentual,
+          valorPago: valorFinal,
         },
-      });
-  
-      setShowModal(false); // Fecha o modal
-      fetchAluno(); // Recarrega os dados do aluno após dar baixa
-  
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setShowModal(false);
+      fetchAluno();
       alert('Pagamento dado baixa com sucesso!');
     } catch (error) {
       console.error('Erro ao dar baixa no pagamento:', error);
@@ -90,26 +123,69 @@ const RelatorioAlunoDetalhes: React.FC = () => {
 
   const estornarPagamento = async (parcelaId: number) => {
     try {
-      const token = localStorage.getItem('token'); // Obtém o token do LocalStorage
-    
+      const token = localStorage.getItem('token');
       if (!token) {
         alert('Token de autenticação não encontrado!');
         return;
       }
-  
-      // Faz o estorno do pagamento e obtém o valor restaurado
       await axios.put(`http://localhost:3333/financeiro/estorno/${parcelaId}`, {}, {
         headers: {
-          Authorization: `Bearer ${token}`, // Inclui o token no cabeçalho da requisição
+          Authorization: `Bearer ${token}`,
         },
       });
-  
-      fetchAluno(); // Recarrega os dados do aluno após o estorno
-  
+      fetchAluno();
       alert('Pagamento estornado com sucesso!');
     } catch (error) {
       console.error('Erro ao estornar pagamento:', error);
       alert('Erro ao estornar pagamento');
+    }
+  };
+
+  const handleDeletarAluno = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!senhaUsuario) {
+        alert('Por favor, insira sua senha para confirmar.');
+        return;
+      }
+      await axios.delete(`http://localhost:3333/alunos/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          senha: senhaUsuario,
+        },
+      });
+      alert('Aluno deletado com sucesso!');
+      navigate('/relatorio-alunos');
+    } catch (error) {
+      console.error('Erro ao deletar aluno:', error);
+      alert('Erro ao deletar aluno. Verifique a senha e tente novamente.');
+    }
+  };
+
+  const handleSalvarEdicao = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Token de autenticação não encontrado!');
+        return;
+      }
+      await axios.put(
+        `http://localhost:3333/alunos/${id}`,
+        { nome, cpf, nomeResponsavel, dataNascimento, endereco, telefone, cursoId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert('Dados do aluno atualizados com sucesso!');
+      setShowModalEdit(false);
+      fetchAluno();
+    } catch (error) {
+      console.error('Erro ao atualizar dados do aluno:', error);
+      alert('Erro ao atualizar dados do aluno.');
     }
   };
 
@@ -216,12 +292,85 @@ const RelatorioAlunoDetalhes: React.FC = () => {
             <p><strong>CPF:</strong> {aluno.cpf}</p>
             <p><strong>Endereço:</strong> {aluno.endereco}</p>
             <p><strong>Telefone:</strong> {aluno.telefone}</p>
-            <button onClick={() => {/* lógica para editar cadastro */}}>Editar Cadastro</button>
+            <p><strong>Curso:</strong> {aluno.cursoMatriculado?.nome}</p>
+            <button onClick={() => setShowModalEdit(true)}>Editar Cadastro</button>
+            <button onClick={() => setShowModalDelete(true)}>Deletar Aluno</button>
           </div>
         )}
       </div>
 
-      {/* Modal para dar baixa */}
+      {showModalEdit && (
+        <div className="modal-popup">
+          <div className="popup-content">
+            <h2>Editar Dados do Aluno</h2>
+            <label>
+              Nome:
+              <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
+            </label>
+            <label>
+              CPF:
+              <input type="text" value={cpf} onChange={(e) => setCpf(e.target.value)} />
+            </label>
+            <label>
+              Nome do Responsável:
+              <input type="text" value={nomeResponsavel} onChange={(e) => setNomeResponsavel(e.target.value)} />
+            </label>
+            <label>
+              Data de Nascimento:
+              <input
+                type="date"
+                value={dataNascimento}
+                onChange={(e) => setDataNascimento(e.target.value)}
+              />
+            </label>
+            <label>
+              Endereço:
+              <input type="text" value={endereco} onChange={(e) => setEndereco(e.target.value)} />
+            </label>
+            <label>
+              Telefone:
+              <input type="text" value={telefone} onChange={(e) => setTelefone(e.target.value)} />
+            </label>
+            <label>
+              Curso:
+              <select
+                value={cursoId}
+                onChange={(e) => setCursoId(Number(e.target.value))}
+              >
+                {cursos.map((curso) => (
+                  <option key={curso.id} value={curso.id}>
+                    {curso.nome}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <div className="modal-buttons">
+              <button onClick={handleSalvarEdicao}>Salvar</button>
+              <button onClick={() => setShowModalEdit(false)}>Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showModalDelete && (
+        <div className="modal-popup">
+          <div className="popup-content">
+            <h2>Confirmação de Exclusão</h2>
+            <p>Para deletar o aluno, insira sua senha de usuário:</p>
+            <input
+              type="password"
+              placeholder="Digite sua senha"
+              value={senhaUsuario}
+              onChange={(e) => setSenhaUsuario(e.target.value)}
+            />
+            <div className="modal-buttons">
+              <button onClick={handleDeletarAluno}>Confirmar Exclusão</button>
+              <button onClick={() => setShowModalDelete(false)}>Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showModal && (
         <div className="modal-popup">
           <div className="popup-content">

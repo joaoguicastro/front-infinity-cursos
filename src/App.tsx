@@ -11,6 +11,9 @@ import RelatorioAlunos from './pages/RelatorioAlunos/RelatorioAlunos';
 import RelatorioDevedores from './pages/RelatorioDevedores/RelatorioDevedores';
 import RelatorioAlunoDetalhes from './pages/relatorioalubosdetalhado/RelatorioAlunoDetalhes';
 import AdminDashboard from './pages/DashboardAdmin/AdminDashboard';
+import TelaPresenca from './pages/PresencaAluno/TelaPresenca';
+import RelatorioPresenca from './pages/RelatorioPresenca/RelatorioPresenca';
+import RelatorioUsuarios from './pages/RelatorioUsuario/RelatorioUsuarios';
 
 const App: React.FC = () => {
   return (
@@ -34,6 +37,9 @@ const App: React.FC = () => {
         <Route path="/admin/relatorio-cursos" element={<RelatorioCursos />} />
         <Route path="/admin/relatorio-alunos" element={<RelatorioAlunos />} />
         <Route path="/admin/relatorio-devedores" element={<RelatorioDevedores />} />
+        <Route path="/presenca" element={<TelaPresenca />} />
+        <Route path="/relatorio-presenca" element={<RelatorioPresenca />} />
+        <Route path="/relatorio-usuarios" element={<RelatorioUsuarios />} />
       </Routes>
     </Router>
   );

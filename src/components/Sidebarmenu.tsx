@@ -26,6 +26,8 @@ const SidebarMenu: React.FC = () => {
               <li onClick={() => navigate('/cadastro-curso')}>Criar Curso</li>
               <li onClick={() => navigate('/cadastro-financeiro')}>Criar Financeiro</li>
               <li onClick={() => navigate('/cadastro-usuario')}>Criar Usuário</li>
+              <li onClick={() => navigate('/presenca')}>Presença</li>
+
             </ul>
           )}
         </li>
@@ -37,6 +39,8 @@ const SidebarMenu: React.FC = () => {
               <li onClick={() => navigate('/relatorio-cursos')}>Relatório de Cursos</li>
               <li onClick={() => navigate('/relatorio-alunos')}>Relatório de Alunos</li>
               <li onClick={() => navigate('/relatorio-devedores')}>Relatório de Devedores</li>
+              <li onClick={() => navigate('/relatorio-presenca')}>Relatorios Presença</li>
+              <li onClick={() => navigate('/relatorio-usuarios')}>Relatorios Usuarios</li>
             </ul>
           )}
         </li>

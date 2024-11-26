@@ -1,45 +1,156 @@
 .page-container-relatorio {
-    display: flex;
-    height: 100vh; /* Garante que a sidebar e o conteúdo preencham a tela */
+  display: flex;
+  height: 100vh; /* Garante que a sidebar e o conteúdo preencham a tela */
+  font-family: 'Arial', sans-serif; /* Fonte mais clean */
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #72b809; /* Cor principal da empresa */
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
+}
+
+.sidebar h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  margin: 10px 0;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #5a9407; /* Cor mais escura para hover */
+}
+
+.relatorio-container {
+  flex: 1; /* Faz o container preencher o restante do espaço */
+  padding: 20px;
+  background-color: #f2f2f2;
+  overflow-y: auto; /* Permite rolagem vertical */
+}
+
+.scrollable-content {
+  max-height: 100%; /* Respeita a altura disponível */
+  overflow-y: auto;
+}
+
+.curso-box {
+  background-color: white;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.curso-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.curso-box h2 {
+  color: #000000; /* Título em preto */
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.curso-box h3 {
+  color: #72b809; /* Subtítulos com a cor da empresa */
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.curso-box ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.curso-box li {
+  background-color: #e9f5e4; /* Fundo claro com tom de verde */
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.curso-box p {
+  color: #555; /* Texto mais claro para descrição */
+  font-size: 14px;
+}
+
+/* Responsividade */
+
+/* Dispositivos menores (mobile) */
+@media (max-width: 768px) {
+  .sidebar {
+      width: 200px;
+      font-size: 14px;
+      padding: 10px;
   }
-  
+
+  .sidebar h1 {
+      font-size: 20px;
+  }
+
+  .sidebar a {
+      font-size: 16px;
+      padding: 8px 10px;
+  }
+
   .relatorio-container {
-    flex: 1;
-    padding: 20px;
-    background-color: #f0f2f5; /* Fundo claro para o conteúdo */
+      padding: 10px;
   }
-  
+
   .curso-box {
-    background-color: white;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 15px;
   }
-  
-  .curso-box h2 {
-    color: #333;
-    margin-bottom: 10px;
+}
+
+/* Telas de 13 polegadas */
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .curso-box {
+      max-width: 90%;
   }
-  
-  .curso-box h3 {
-    color: #555;
-    margin-bottom: 5px;
+
+  .relatorio-container {
+      padding: 15px;
   }
-  
-  .curso-box ul {
-    list-style-type: none;
-    padding-left: 0;
+}
+
+/* Telas de 21 polegadas */
+@media (min-width: 1281px) and (max-width: 1920px) {
+  .curso-box {
+      max-width: 85%;
   }
-  
-  .curso-box li {
-    background-color: #e9ecef;
-    margin-bottom: 5px;
-    padding: 10px;
-    border-radius: 5px;
+
+  .relatorio-container {
+      padding: 20px;
   }
-  
-  .curso-box p {
-    color: #777;
+}
+
+/* Telas de 27 polegadas */
+@media (min-width: 1921px) {
+  .curso-box {
+      max-width: 75%;
+      padding: 30px;
   }
-  
+
+  .relatorio-container {
+      padding: 30px;
+  }
+}

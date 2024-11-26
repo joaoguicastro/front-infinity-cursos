@@ -1,56 +1,136 @@
 .admin-sidebar {
-    width: 250px;
-    background-color: #2c3e50;
-    padding: 20px;
-    color: #ecf0f1;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  background-color: #72b809; /* Cor verde da empresa */
+  padding: 20px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Scroll no conteúdo da sidebar */
+}
+
+.admin-sidebar h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-sidebar li {
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.admin-sidebar .folder {
+  font-weight: bold;
+  color: #003b73; /* Azul escuro para destaque */
+}
+
+.admin-sidebar .folder-content {
+  padding-left: 15px;
+  display: none; /* Esconde por padrão */
+}
+
+.admin-sidebar .active .folder-content {
+  display: block; /* Mostra conteúdo quando ativo */
+}
+
+.admin-sidebar .folder-content li {
+  font-weight: normal;
+  color: #ffffff;
+}
+
+.admin-sidebar li:hover {
+  background-color: #005bb5; /* Azul mais claro ao passar o mouse */
+}
+
+.admin-sidebar .folder-content li:hover {
+  background-color: #f2f2f2; /* Branco claro ao passar o mouse */
+  color: #003b73; /* Azul escuro para contraste */
+}
+
+/* Responsividade */
+@media (max-width: 768px) { /* Para tablets e telas menores */
+  .admin-sidebar {
+    width: 200px;
+    padding: 15px;
   }
-  
+
+  .admin-sidebar h3 {
+    font-size: 18px;
+  }
+
+  .admin-sidebar li {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .admin-sidebar .folder-content li {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) { /* Para telas de celular */
+  .admin-sidebar {
+    width: 100%;
+    height: auto; /* Ajusta a altura para o conteúdo */
+    position: fixed; /* Fixado no topo */
+    z-index: 1000;
+    padding: 10px;
+    overflow-y: auto; /* Scroll no conteúdo se necessário */
+  }
+
+  .admin-sidebar h3 {
+    font-size: 16px;
+  }
+
+  .admin-sidebar li {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .admin-sidebar .folder-content li {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1920px) { /* Para telas de 13" a 27" */
+  .admin-sidebar {
+    width: 250px;
+  }
+
+  .admin-sidebar li {
+    font-size: 16px;
+  }
+
   .admin-sidebar h3 {
     font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
   }
-  
-  .admin-sidebar ul {
-    list-style: none;
-    padding: 0;
+}
+
+@media (min-width: 1921px) { /* Para telas maiores que 27" */
+  .admin-sidebar {
+    width: 300px;
   }
-  
+
   .admin-sidebar li {
-    padding: 10px 15px;
-    margin-bottom: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 4px;
+    font-size: 18px;
+    padding: 12px 18px;
   }
-  
-  .admin-sidebar .folder {
-    font-weight: bold;
+
+  .admin-sidebar h3 {
+    font-size: 22px;
   }
-  
-  .admin-sidebar .folder-content {
-    padding-left: 15px;
-  }
-  
-  .admin-sidebar .active .folder-content {
-    display: block;
-  }
-  
-  .admin-sidebar .folder-content li {
-    font-weight: normal;
-  }
-  
-  .admin-sidebar li:hover {
-    background-color: #34495e;
-  }
-  
-  .admin-sidebar .folder-content li:hover {
-    background-color: #3c586d;
-  }
-  
+}

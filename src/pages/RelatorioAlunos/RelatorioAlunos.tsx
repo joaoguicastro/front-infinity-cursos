@@ -20,6 +20,7 @@ const RelatorioAlunos: React.FC = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(response.data);
       setAlunos(response.data);
       setAlunosFiltrados(response.data);
       setShowAlunos(true);
@@ -28,12 +29,18 @@ const RelatorioAlunos: React.FC = () => {
     }
   };
 
-  // Função para filtrar alunos pelo nome
+  // Função para filtrar alunos pelo nome ao clicar no botão
   const filtrarPorNome = () => {
-    const alunosFiltrados = alunos.filter(aluno =>
+    if (!filtroNome.trim()) {
+      setAlunosFiltrados(alunos); // Mostra todos os alunos se o filtro estiver vazio
+      return;
+    }
+
+    const alunosFiltrados = alunos.filter((aluno) =>
       aluno.nome.toLowerCase().includes(filtroNome.toLowerCase())
     );
     setAlunosFiltrados(alunosFiltrados);
+    setShowAlunos(true);
   };
 
   // Função para navegar para a página de detalhes do aluno
@@ -51,7 +58,7 @@ const RelatorioAlunos: React.FC = () => {
             type="text"
             value={filtroNome}
             onChange={(e) => setFiltroNome(e.target.value)}
-            placeholder="Buscar por nome"
+            placeholder="Buscar por nome ou parte do nome"
           />
           <button onClick={filtrarPorNome}>Buscar</button>
           <button onClick={fetchAlunos}>Listar Todos</button>
@@ -59,14 +66,18 @@ const RelatorioAlunos: React.FC = () => {
 
         {showAlunos && (
           <div className="alunos-list">
-            {alunosFiltrados.map((aluno) => (
-              <div key={aluno.id} className="aluno-item">
-                <p><strong>Nome:</strong> {aluno.nome}</p>
-                <p><strong>CPF:</strong> {aluno.cpf}</p>
-                <p><strong>Curso:</strong> {aluno.cursoMatriculado ? aluno.cursoMatriculado.nome : 'Nenhum curso'}</p>
-                <button onClick={() => handleVerDetalhes(aluno.id)}>Ver Detalhes</button>
-              </div>
-            ))}
+            {alunosFiltrados.length > 0 ? (
+              alunosFiltrados.map((aluno) => (
+                <div key={aluno.id} className="aluno-item">
+                  <p><strong>Nome:</strong> {aluno.nome}</p>
+                  <p><strong>CPF:</strong> {aluno.cpf}</p>
+                  <p><strong>Curso:</strong> {aluno.cursoMatriculado?.nome || 'Nenhum curso'}</p>
+                  <button onClick={() => handleVerDetalhes(aluno.id)}>Ver Detalhes</button>
+                </div>
+              ))
+            ) : (
+              <p>Nenhum aluno encontrado.</p>
+            )}
           </div>
         )}
       </div>

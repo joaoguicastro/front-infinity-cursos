@@ -1,0 +1,193 @@
+.page-container {
+    display: flex;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+}
+
+.content-container {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-container label {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.filter-container input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.filter-container button {
+    padding: 10px 20px;
+    background-color: #72b809;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.filter-container button:hover {
+    background-color: #5a9407;
+}
+
+.presenca-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 20px;
+}
+
+.presenca-item {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.presenca-item p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+/* Responsividade para diferentes tamanhos de tela */
+
+/* Para telas de 13 polegadas */
+@media (max-width: 1280px) {
+    .content-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .filter-container input, .filter-container button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .presenca-list {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .presenca-item {
+        padding: 12px;
+    }
+
+    .presenca-item p {
+        font-size: 12px;
+    }
+}
+
+/* Para telas de 21 polegadas */
+@media (min-width: 1366px) and (max-width: 1920px) {
+    .content-container {
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .filter-container input, .filter-container button {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .presenca-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .presenca-item {
+        padding: 15px;
+    }
+
+    .presenca-item p {
+        font-size: 14px;
+    }
+}
+
+/* Para telas de 27 polegadas */
+@media (min-width: 1920px) {
+    .content-container {
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .filter-container input, .filter-container button {
+        font-size: 18px;
+        padding: 12px;
+    }
+
+    .presenca-list {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .presenca-item {
+        padding: 20px;
+    }
+
+    .presenca-item p {
+        font-size: 16px;
+    }
+}
+
+/* Para dispositivos móveis */
+@media (max-width: 768px) {
+    .page-container {
+        flex-direction: column;
+    }
+
+    .content-container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    .filter-container input, .filter-container button {
+        font-size: 14px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .presenca-list {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .presenca-item {
+        padding: 10px;
+    }
+
+    .presenca-item p {
+        font-size: 12px;
+    }
+}
